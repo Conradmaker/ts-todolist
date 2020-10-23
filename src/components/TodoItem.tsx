@@ -18,10 +18,12 @@ const ItemBox = styled.div`
     color: #00838f;
     font-size: 24px;
     margin-right: 10px;
+    cursor: pointer;
   }
   p {
     font-size: 20px;
     flex: 1;
+    cursor: pointer;
   }
 
   small {

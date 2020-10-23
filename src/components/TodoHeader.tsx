@@ -39,9 +39,10 @@ type TodoHeaderProps = {
   todos: Todo[];
 };
 export default function TodoHeader({todos}: TodoHeaderProps) {
+  const bumber = todos.filter((v) => v.done === false).length;
   return (
     <HeaderContainer>
-      <h1>You have {todos.length} tasks today</h1>
+      <h1>You have {bumber} tasks today</h1>
       <ButtonWrapper>
         <button>Today</button>
         <button>Tomorrow</button>
