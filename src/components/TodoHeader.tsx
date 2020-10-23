@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Todo} from "../modules/todos";
 
 const ButtonWrapper = styled.div`
   overflow-x: scroll;
@@ -34,10 +35,13 @@ const HeaderContainer = styled.div`
   }
 `;
 
-export default function TodoHeader() {
+type TodoHeaderProps = {
+  todos: Todo[];
+};
+export default function TodoHeader({todos}: TodoHeaderProps) {
   return (
     <HeaderContainer>
-      <h1>You have 5 tasks today</h1>
+      <h1>You have {todos.length} tasks today</h1>
       <ButtonWrapper>
         <button>Today</button>
         <button>Tomorrow</button>

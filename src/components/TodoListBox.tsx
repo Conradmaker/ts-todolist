@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Todo} from "../modules/todos";
 import InsertForm from "./InsertForm";
 import TodoHeader from "./TodoHeader";
 import TodoList from "./TodoList";
@@ -17,12 +18,25 @@ const Box = styled.div`
   position: relative;
 `;
 
-export default function TodoListBox() {
+type TodoListBoxProps = {
+  onAdd: (text: string) => void;
+  onRemove: (id: number) => void;
+  onToggle: (id: number) => void;
+  todos: Todo[];
+};
+export default function TodoListBox({
+  onAdd,
+  onToggle,
+  onRemove,
+  todos,
+}: TodoListBoxProps) {
   return (
-    <Box>
-      <TodoHeader />
-      <TodoList />
-      <InsertForm />
-    </Box>
+    <>
+      <Box>
+        <TodoHeader todos={todos} />
+        <TodoList onRemove={onRemove} onToggle={onToggle} todos={todos} />
+        <InsertForm onAdd={onAdd} />
+      </Box>
+    </>
   );
 }

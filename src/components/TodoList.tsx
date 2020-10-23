@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Todo} from "../modules/todos";
 import TodoItem from "./TodoItem";
 
 const ListContaiber = styled.div`
@@ -23,10 +24,17 @@ const ListContaiber = styled.div`
   }
 `;
 
-export default function TodoList() {
+type TodoListProps = {
+  onRemove: (id: number) => void;
+  onToggle: (id: number) => void;
+  todos: Todo[];
+};
+export default function TodoList({onRemove, onToggle, todos}: TodoListProps) {
   return (
     <ListContaiber>
-      <TodoItem />
+      {todos.map((v) => (
+        <TodoItem key={v.id} todo={v} onToggle={onToggle} onRemove={onRemove} />
+      ))}
     </ListContaiber>
   );
 }

@@ -46,20 +46,35 @@ const Form = styled.form`
   }
 `;
 
-export default function InsertForm() {
+type InsertFormProps = {
+  onAdd: (text: string) => void;
+};
+export default function InsertForm({onAdd}: InsertFormProps) {
+  const [text, setText] = useState("");
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
   const [open, setOpen] = useState(false);
   const onOpen = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     setOpen(!open);
   };
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (text) {
+      onAdd(text);
+    }
+  };
   return (
-    <Form>
-      {open && <input type="text" placeholder="What to do?" />}
+    <Form onSubmit={onSubmit}>
+      {open && (
+        <input type="text" placeholder="What to do?" onChange={onChange} />
+      )}
       {!open ? (
         <button type="button" onClick={onOpen}>
           <span>+</span>&nbsp; Add a task
         </button>
       ) : (
-        <button type="button" onClick={onOpen}>
+        <button type="submit">
           <span>+</span>&nbsp; Add a task
         </button>
       )}

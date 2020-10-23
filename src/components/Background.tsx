@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {Todo} from "../modules/todos";
 import TodoListBox from "./TodoListBox";
 
 const BackgroundContainer = styled.div`
@@ -10,11 +11,26 @@ const BackgroundContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-export default function Background() {
+type BackgroundProps = {
+  onAdd: (text: string) => void;
+  onRemove: (id: number) => void;
+  onToggle: (id: number) => void;
+  todos: Todo[];
+};
+export default function Background({
+  onAdd,
+  onRemove,
+  onToggle,
+  todos,
+}: BackgroundProps) {
   return (
     <BackgroundContainer>
-      <TodoListBox />
+      <TodoListBox
+        onAdd={onAdd}
+        onRemove={onRemove}
+        onToggle={onToggle}
+        todos={todos}
+      />
     </BackgroundContainer>
   );
 }
